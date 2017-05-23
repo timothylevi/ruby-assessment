@@ -21,3 +21,25 @@ def print_values(list_node)
     print_values(list_node.next_node)
   end
 end
+
+def reverse_list(list_node)
+  curr_node = list_node
+  next_node = list_node.next_node
+  last_node = nil
+
+  while (next_node != nil) do
+    if curr_node == list_node
+      next_node = curr_node.next_node
+      curr_node.next_node = nil
+      last_node = curr_node
+      curr_node = next_node
+    else
+      next_node = curr_node.next_node
+      curr_node.next_node = last_node
+      last_node = curr_node
+      curr_node = next_node
+    end
+  end
+
+  return last_node
+end
