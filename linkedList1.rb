@@ -24,18 +24,13 @@ end
 
 def reverse_list(list_node)
   stack = Stack.new
-  stack.push(list_node)
 
-  last_node = nil
-  curr_node = stack.pop
-
-  while (curr_node != nil) do
-    curr_node.next_node = last_node
-    last_node = curr_node
-    curr_node = stack.pop
+  while (list_node != nil) do
+    stack.push(list_node.value)
+    list_node = list_node.next_node
   end
 
-  return last_node
+  return stack.pop
 end
 
 class Stack
@@ -46,7 +41,7 @@ class Stack
   end
 
   def push(element)
-    @data = element
+    @data = LinkedListNode.new(element, @data)
   end
 
   def pop
