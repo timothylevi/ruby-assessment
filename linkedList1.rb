@@ -43,3 +43,22 @@ def reverse_list(list_node)
 
   return last_node
 end
+
+class Stack
+  attr_reader :data
+
+  def initialize
+    @data = nil
+  end
+
+  def push(element)
+    @data = element
+  end
+
+  def pop
+    last_item = @data
+    @data = last_item.next_node
+
+    return last_item
+  end
+end
