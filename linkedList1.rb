@@ -48,6 +48,17 @@ def reverse_list_mutate(list_node)
   return last_node
 end
 
+def reverse_list_mutate_recursive(list_node, prev_node=nil)
+  next_node = list_node.next_node
+  list_node.next_node = prev_node
+
+  if next_node == nil
+    return list_node
+  end
+
+  return reverse_list_mutate_recursive(next_node, list_node)
+end
+
 class Stack
   attr_reader :data
 
