@@ -23,22 +23,16 @@ def print_values(list_node)
 end
 
 def reverse_list(list_node)
-  curr_node = list_node
-  next_node = list_node.next_node
-  last_node = nil
+  stack = Stack.new
+  stack.push(list_node)
 
-  while (next_node != nil) do
-    if curr_node == list_node
-      next_node = curr_node.next_node
-      curr_node.next_node = nil
-      last_node = curr_node
-      curr_node = next_node
-    else
-      next_node = curr_node.next_node
-      curr_node.next_node = last_node
-      last_node = curr_node
-      curr_node = next_node
-    end
+  last_node = nil
+  curr_node = stack.pop
+
+  while (curr_node != nil) do
+    curr_node.next_node = last_node
+    last_node = curr_node
+    curr_node = stack.pop
   end
 
   return last_node
@@ -56,6 +50,8 @@ class Stack
   end
 
   def pop
+    return nil if not @data
+
     last_item = @data
     @data = last_item.next_node
 
