@@ -33,6 +33,21 @@ def reverse_list(list_node)
   return stack.pop
 end
 
+def reverse_list_mutate(list_node)
+  curr_node = list_node
+  last_node = nil
+  next_node = list_node.next_node
+
+  while (curr_node != nil) do
+    next_node = curr_node.next_node
+    curr_node.next_node = last_node
+    last_node = curr_node
+    curr_node = next_node
+  end
+
+  return last_node
+end
+
 class Stack
   attr_reader :data
 
