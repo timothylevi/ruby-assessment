@@ -8,10 +8,6 @@ class LinkedListNode
   end
 end
 
-node1 = LinkedListNode.new(37)
-node2 = LinkedListNode.new(99, node1)
-node3 = LinkedListNode.new(12, node2)
-
 def print_values(list_node)
   print "#{list_node.value} --> "
   if list_node.next_node.nil?
@@ -57,6 +53,22 @@ def reverse_list_mutate_recursive(list_node, prev_node=nil)
   end
 
   return reverse_list_mutate_recursive(next_node, list_node)
+end
+
+def detect_cycle(list_node)
+  return false if list_node.next_node == nil
+
+  slow = list_node
+  fast = list_node.next_node
+
+  while (fast != nil && fast.next_node != nil) do
+    slow = slow.next_node
+    fast = fast.next_node.next_node
+
+    return true if fast == slow
+  end
+
+  return false
 end
 
 class Stack
