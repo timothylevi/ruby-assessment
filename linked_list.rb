@@ -1,5 +1,3 @@
-require 'minitest'
-
 module LinkedList
   module_function
 
