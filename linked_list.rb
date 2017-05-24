@@ -39,48 +39,47 @@ module LinkedList
     end
   end
 
-  def print_values(list_node)
-    print "#{list_node.value} --> "
+  def print_values(curr_node)
+    print "#{curr_node.value} --> "
 
-    if !list_node.next_node
+    if !curr_node.next_node
       print "nil\n"
       return
     end
 
-    print_values(list_node.next_node)
+    print_values(curr_node.next_node)
   end
 
-  def cycle?(list_node)
-    return false if !list_node.next_node
+  def cycle?(curr_node)
+    return false if !curr_node.next_node
 
-    slow = list_node
-    fast = list_node.next_node
+    slow_pointer = curr_node
+    fast_pointer = curr_node
 
-    while fast && fast.next_node do
-      slow = slow.next_node
-      fast = fast.next_node.next_node
+    while fast_pointer && fast_pointer.next_node do
+      slow_pointer = slow_pointer.next_node
+      fast_pointer = fast_pointer.next_node.next_node
 
-      return true if fast == slow
+      return true if fast_pointer == slow_pointer
     end
 
     false
   end
 
-  def reverse_list(list_node)
+  def reverse_list(curr_node)
     stack = Stack.new
 
-    while list_node do
-      stack.push(list_node.value)
-      list_node = list_node.next_node
+    while curr_node do
+      stack.push(curr_node.value)
+      curr_node = curr_node.next_node
     end
 
     stack.pop
   end
 
-  def reverse_list!(list_node)
-    curr_node = list_node
+  def reverse_list!(curr_node)
     last_node = nil
-    next_node = list_node.next_node
+    next_node = curr_node.next_node
 
     while curr_node do
       next_node = curr_node.next_node
@@ -92,14 +91,14 @@ module LinkedList
     last_node
   end
 
-  def reverse_list_recursive!(list_node, prev_node = nil)
-    next_node = list_node.next_node
-    list_node.next_node = prev_node
+  def reverse_list_recursive!(curr_node, prev_node = nil)
+    next_node = curr_node.next_node
+    curr_node.next_node = prev_node
 
     if !next_node
-      return list_node
+      return curr_node
     end
 
-    reverse_list_recursive!(next_node, list_node)
+    reverse_list_recursive!(next_node, curr_node)
   end
 end
